@@ -1,10 +1,9 @@
-
-import { useState, useEffect } from "react"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { categories } from "@/lib/categories"
-import CategoryTabs from "./category-tabs"
-import ProductCard from "./product-card"
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { categories } from "@/lib/categories";
+import CategoryTabs from "./category-tabs";
+import ProductCard from "./product-card";
 // import ProductCard from "@/components/product-card"
 // import CategoryTabs from "@/components/category-tabs"
 // import { products, categories } from "@/lib/data"
@@ -22,17 +21,19 @@ export interface Product {
 }
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("fashion")
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchQuery, setSearchQuery] = useState("")
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://clicksbyakhiadm.vercel.app/api/products");
+        const response = await fetch(
+          "https://clicksbyakhiadm.vercel.app/api/products"
+        );
         if (!response.ok) throw new Error("Network response was not ok");
-  
+
         const data = await response.json();
         const sorted = [...data.products].reverse(); // Latest products first
         setProducts(sorted);
@@ -40,29 +41,29 @@ export default function Home() {
         console.log("Error fetching data:", error);
       }
     };
-  
+
     fetchProducts();
   }, []);
 
-  console.log("Products:", products)
- 
-
+  console.log("Products:", products);
+  console.log("selectedCategory", selectedCategory);
 
   useEffect(() => {
     // Filter products based on category and search query
-    
 
     const filtered = products.filter((product) => {
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
-      console.log("Selected Category:", selectedCategory)
-      const matchesSearch =
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-        // product?.description.toLowerCase().includes(searchQuery.toLowerCase())
-        console.log("matchesSearch",matchesSearch)
-      return matchesCategory && matchesSearch
-    })
-    setFilteredProducts(filtered)
-  }, [selectedCategory, searchQuery])
+      const matchesCategory =
+        selectedCategory === "all" || product.category === selectedCategory;
+      console.log("Selected Category:", selectedCategory);
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      // product?.description.toLowerCase().includes(searchQuery.toLowerCase())
+      console.log("matchesSearch", matchesSearch);
+      return matchesCategory && matchesSearch;
+    });
+    setFilteredProducts(filtered);
+  }, [products, selectedCategory, searchQuery]);
 
   return (
     <main className="min-h-screen">
@@ -71,7 +72,15 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center">
-              <div className="text-2xl font-bold text-rose-600">ClicksByAkhi</div>
+              {/* <div className="text-2xl font-bold text-rose-600">ClicksByAkhi</div> */}
+              <div className="flex items-center space-x-4">
+                <img
+                  src="/c.jpeg"
+                  className="w-14 h-14 rounded-full object-cover"
+                  alt="cba"
+                />
+                <p className="text-lg font-medium">ClicksByAkhi</p>
+              </div>
             </div>
 
             <div className="relative w-full md:w-1/3">
@@ -101,23 +110,27 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-6">
             {selectedCategory === "all"
               ? "All Products"
-              : `${categories.find((c) => c.id === selectedCategory)?.name} Products`}
+              : `${
+                  categories.find((c) => c.id === selectedCategory)?.name
+                } Products`}
             {searchQuery && ` matching "${searchQuery}"`}
           </h2>
 
           {filteredProducts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-lg text-gray-500">No products found. Try a different search or category.</p>
+              <p className="text-lg text-gray-500">
+                No products found. Try a different search or category.
+              </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredProducts.map((product ,index) => (
-                <ProductCard key={product.id} product={product} index = {index}/>
+              {filteredProducts.map((product, index) => (
+                <ProductCard key={product.id} product={product} index={index} />
               ))}
             </div>
           )}
         </div>
       </div>
     </main>
-  )
+  );
 }

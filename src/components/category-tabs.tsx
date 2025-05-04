@@ -20,7 +20,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
       <Button
         variant={selectedCategory === "all" ? "default" : "outline"}
         onClick={() => onSelectCategory("all")}
-        className="rounded-full text-black"
+        className="rounded-full text-white bg-blue-500"
       >
         All Products
       </Button>
@@ -30,7 +30,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           key={category.id}
           variant={selectedCategory === category.id ? "default" : "outline"}
           onClick={() => onSelectCategory(category.id)}
-          className="rounded-full text-black"
+          className="rounded-full text-white bg-blue-600" 
         >
           {category.icon} {category.name}
         </Button>
