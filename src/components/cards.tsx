@@ -1,12 +1,15 @@
-// ...imports remain the same
 
-import { useEffect, useState } from "react";
-import { Badge } from "./ui/badge";
-import { Card, CardContent } from "./ui/card";
-import { Input } from "./ui/input";
-// import { Input } from "./ui/input"; // Assuming you're using a custom Input component
+import { useState, useEffect } from "react"
+import { Search } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { categories } from "@/lib/categories"
+import CategoryTabs from "./category-tabs"
+import ProductCard from "./product-card"
+// import ProductCard from "@/components/product-card"
+// import CategoryTabs from "@/components/category-tabs"
+// import { products, categories } from "@/lib/data"
 
-interface Product {
+export interface Product {
   id: number;
   name: string;
   image: string;
@@ -14,109 +17,107 @@ interface Product {
   oldPrice: number;
   discount: number;
   rating: number;
+  category: string;
   url: string;
 }
 
-export default function Cards() {
+export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState("fashion")
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("")
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/products")
-      .then((response) => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://clicksbyakhiadm.vercel.app/api/products");
         if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then((data) => {
+  
+        const data = await response.json();
         const sorted = [...data.products].reverse(); // Latest products first
         setProducts(sorted);
-      })
-      .catch((error) => console.log("Error fetching data:", error));
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+  
+    fetchProducts();
   }, []);
 
-  const handleCardClick = (url: string) => {
-    window.open(url, "_blank");
-  };
+  console.log("Products:", products)
+ 
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  useEffect(() => {
+    // Filter products based on category and search query
+    
+
+    const filtered = products.filter((product) => {
+      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
+      console.log("Selected Category:", selectedCategory)
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+        // product?.description.toLowerCase().includes(searchQuery.toLowerCase())
+        console.log("matchesSearch",matchesSearch)
+      return matchesCategory && matchesSearch
+    })
+    setFilteredProducts(filtered)
+  }, [selectedCategory, searchQuery])
 
   return (
-    <div className="max-w-screen-xl mx-auto px-4 py-6">
-      {/* Sticky header with search */}
-      <header className="sticky top-0 bg-white z-10 py-4 mb-6 shadow-sm">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold">Shop</h1>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Discover amazing products
-            </p>
-          </div>
+    <main className="min-h-screen">
+      {/* Header */}
+      <header className="bg-white border-b sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center">
+              <div className="text-2xl font-bold text-rose-600">ClicksByAkhi</div>
+            </div>
 
-          <Input
-            type="text"
-            placeholder="Search product..."
-            className="w-full sm:w-64"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+            <div className="relative w-full md:w-1/3">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search products..."
+                className="pl-8"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Product list */}
-      <section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProducts.map((product, index) => (
-            <Card
-              key={index}
-              className="cursor-pointer hover:shadow-lg transition-all h-full flex flex-col"
-              onClick={() => handleCardClick(product.url)}
-            >
-              <div className="w-full h-52 overflow-hidden rounded-t-md">
-                <img
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/placeholder.svg";
-                  }}
-                />
-              </div>
+      {/* Category Tabs */}
+      <div className="container mx-auto px-4 py-6">
+        <CategoryTabs
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
 
-              <CardContent className="p-4 flex flex-col justify-between flex-1">
-                <h3 className="text-base sm:text-lg font-medium truncate mb-2">
-                  {product.name}
-                </h3>
+        {/* Products Grid */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold mb-6">
+            {selectedCategory === "all"
+              ? "All Products"
+              : `${categories.find((c) => c.id === selectedCategory)?.name} Products`}
+            {searchQuery && ` matching "${searchQuery}"`}
+          </h2>
 
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-primary font-bold text-sm sm:text-base">
-                    ${product.price.toFixed(2)}
-                  </span>
-                  {product.oldPrice > product.price && (
-                    <span className="text-muted-foreground line-through text-xs">
-                      ${product.oldPrice.toFixed(2)}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex justify-between items-center text-xs sm:text-sm">
-                  {product.discount > 0 ? (
-                    <Badge className="bg-green-100 text-green-800">
-                      {product.discount}% OFF
-                    </Badge>
-                  ) : (
-                    <span />
-                  )}
-                  <div className="text-yellow-500 font-semibold">
-                    ★ {product.rating.toFixed(1)}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {filteredProducts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-lg text-gray-500">No products found. Try a different search or category.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredProducts.map((product ,index) => (
+                <ProductCard key={product.id} product={product} index = {index}/>
+              ))}
+            </div>
+          )}
         </div>
-      </section>
-    </div>
-  );
+      </div>
+    </main>
+  )
 }
