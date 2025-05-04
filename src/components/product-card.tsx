@@ -12,7 +12,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
   return (
     <Card
         key={index}
-      className="cursor-pointer hover:shadow-lg transition-all h-full flex flex-col"
+      className="cursor-pointer hover:shadow-lg transition-all h-50 sm:h-full flex flex-col"
         onClick={() => handleCardClick(product.url)}
     >
       <div className="w-full h-52 overflow-hidden rounded-t-md">
@@ -26,7 +26,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
         />
       </div>
 
-      <CardContent className="p-4 flex flex-col justify-between flex-1">
+      <CardContent className="p-3 pt-0 flex flex-col justify-between flex-1">
         <h3 className="text-base sm:text-lg font-medium truncate mb-2">
           {product.name}
         </h3>

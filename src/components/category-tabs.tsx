@@ -18,10 +18,14 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
   return (
     <div className="flex flex-wrap gap-2 border-b pb-4">
       <Button
-        variant={selectedCategory === "all" ? "default" : "outline"}
+        // variant={selectedCategory === "all" ? "default" : "outline"}
         onClick={() => onSelectCategory("all")}
-        className="rounded-full text-white bg-blue-500"
-      >
+        className={`${
+            selectedCategory === "all"
+              ? "bg-green-900 text-black hover:bg-green-200"
+              : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
+          }`}
+      > 
         All Products
       </Button>
 
@@ -30,7 +34,11 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           key={category.id}
           variant={selectedCategory === category.id ? "default" : "outline"}
           onClick={() => onSelectCategory(category.id)}
-          className="rounded-full text-white bg-blue-600" 
+          className={`${
+            selectedCategory === category.id ?
+              "bg-green-900 text-black hover:bg-green-800"
+              : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
+          }`} 
         >
           {category.icon} {category.name}
         </Button>
