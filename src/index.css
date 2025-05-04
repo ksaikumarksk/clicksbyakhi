@@ -5,6 +5,14 @@
 
 #root{
   width: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 768px){
+  #root{
+    width: 100%;
+    padding: 10px;
+  }
 }
 
 :root {
@@ -83,7 +91,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   cursor: pointer;
   transition: border-color 0.25s;
 }

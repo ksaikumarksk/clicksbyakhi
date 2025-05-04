@@ -12,7 +12,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
   return (
     <Card
         key={index}
-      className="cursor-pointer hover:shadow-lg transition-all h-50 sm:h-full flex flex-col"
+      className="cursor-pointer hover:shadow-lg transition-all h-50 sm:h-full flex flex-col p-0"
         onClick={() => handleCardClick(product.url)}
     >
       <div className="w-full h-52 overflow-hidden rounded-t-md">

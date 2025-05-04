@@ -16,13 +16,13 @@ interface CategoryTabsProps {
 
 export default function CategoryTabs({ categories, selectedCategory, onSelectCategory }: CategoryTabsProps) {
   return (
-    <div className="flex flex-wrap gap-2 border-b pb-4">
+    <div className="flex flex-wrap gap-2 border-b pb-4 ">
       <Button
         // variant={selectedCategory === "all" ? "default" : "outline"}
         onClick={() => onSelectCategory("all")}
         className={`${
             selectedCategory === "all"
-              ? "bg-green-900 text-black hover:bg-green-200"
+              ? "bg-green-300 text-black hover:bg-green-400"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`}
       > 
@@ -36,7 +36,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           onClick={() => onSelectCategory(category.id)}
           className={`${
             selectedCategory === category.id ?
-              "bg-green-900 text-black hover:bg-green-800"
+              "bg-green-300 text-black hover:bg-green-400"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`} 
         >
