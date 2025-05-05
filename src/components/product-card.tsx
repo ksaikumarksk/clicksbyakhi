@@ -51,7 +51,13 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
             <span />
           )}
           <div className="text-yellow-500 font-semibold">
-            ★ {(product.rating ?? 0).toFixed(1)}
+          {product?.rating != null && product.rating&& (
+            <span>
+              {/* {product.oldPrice.toFixed(2)} */}
+              ★ {(product.rating ?? 0).toFixed(1)}
+            </span>
+          )}
+           
           </div>
         </div>
       </CardContent>
