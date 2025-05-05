@@ -45,6 +45,7 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  
   console.log("Products:", products);
   console.log("selectedCategory", selectedCategory);
 
@@ -64,6 +65,14 @@ export default function Home() {
     });
     setFilteredProducts(filtered);
   }, [products, selectedCategory, searchQuery]);
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex justify-center items-center">
+        <div className="w-6 h-6 border-4 border-green-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen">
