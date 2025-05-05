@@ -13,9 +13,9 @@ export interface Product {
   name: string;
   image: string;
   price: number;
-  oldPrice: number;
-  discount: number;
-  rating: number;
+  oldPrice: number | null;
+  discount: number | null;
+  rating: number | null;
   category: string;
   url: string;
 }

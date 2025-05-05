@@ -35,7 +35,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
           <span className="text-primary font-bold text-sm sm:text-base">
             {product.price.toFixed(2)}
           </span>
-          {product.oldPrice > product.price && (
+          {product?.oldPrice != null && product.oldPrice > product.price && (
             <span className="text-muted-foreground line-through text-xs">
               {product.oldPrice.toFixed(2)}
             </span>
@@ -43,7 +43,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
         </div>
 
         <div className="flex justify-between items-center text-xs sm:text-sm">
-          {product.discount > 0 ? (
+          {(product.discount ?? 0) > 0 ? (
             <Badge className="bg-green-100 text-green-800">
               {product.discount}% OFF
             </Badge>
@@ -51,7 +51,7 @@ export default function ProductCard({ product ,index }: { product: Product ,inde
             <span />
           )}
           <div className="text-yellow-500 font-semibold">
-            ★ {product.rating.toFixed(1)}
+            ★ {(product.rating ?? 0).toFixed(1)}
           </div>
         </div>
       </CardContent>
