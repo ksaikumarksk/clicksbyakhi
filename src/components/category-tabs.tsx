@@ -27,7 +27,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
         onClick={() => onSelectCategory("all")}
         className={`${
             selectedCategory === "all"
-              ? "bg-green-800 text-black hover:bg-green-900"
+              ? "bg-green-500 text-black hover:bg-green-600"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`}
       > 
@@ -41,7 +41,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           onClick={() => onSelectCategory(category.id)}
           className={`${
             selectedCategory === category.id ?
-              "bg-green-300 text-black hover:bg-green-400"
+              "bg-green-500 text-black hover:bg-green-600"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`} 
         >
