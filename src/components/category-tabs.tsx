@@ -15,9 +15,14 @@ interface CategoryTabsProps {
 }
 
 export default function CategoryTabs({ categories, selectedCategory, onSelectCategory }: CategoryTabsProps) {
+
   return (
-    <div className="flex flex-wrap gap-2 border-b pb-4 ">
-      <Button
+      <div className="sticky flex flex-wrap gap-2 border-b pb-4">
+      
+      <div
+        className="flex overflow-x-auto space-x-4 px-10 scrollbar-hide scrollbar-thumb-gray-200 scrollbar-track-gray-100"
+      >
+        <Button
         // variant={selectedCategory === "all" ? "default" : "outline"}
         onClick={() => onSelectCategory("all")}
         className={`${
@@ -43,6 +48,8 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           {category.icon} {category.name}
         </Button>
       ))}
+      </div>
     </div>
+      
   )
 }

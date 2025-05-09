@@ -87,6 +87,7 @@ export default function Home() {
                   src="/c.jpeg"
                   className="w-14 h-14 rounded-full object-cover"
                   alt="cba"
+                  onClick={() =>setSelectedCategory("all")}
                 />
                 <p className="text-lg font-medium">ClicksByAkhi</p>
               </div>
