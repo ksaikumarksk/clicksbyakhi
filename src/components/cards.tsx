@@ -45,7 +45,6 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  
   console.log("Products:", products);
   console.log("selectedCategory", selectedCategory);
 
@@ -76,18 +75,16 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center">
-              {/* <div className="text-2xl font-bold text-rose-600">ClicksByAkhi</div> */}
               <div className="flex items-center space-x-4">
                 <img
                   src="/c.jpeg"
                   className="w-14 h-14 rounded-full object-cover"
                   alt="cba"
-                  onClick={() =>setSelectedCategory("all")}
+                  onClick={() => setSelectedCategory("all")}
                 />
                 <p className="text-lg font-medium">ClicksByAkhi</p>
               </div>
@@ -107,7 +104,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Category Tabs */}
       <div className="container mx-auto px-4 py-6">
         <CategoryTabs
           categories={categories}
@@ -115,7 +111,6 @@ export default function Home() {
           onSelectCategory={setSelectedCategory}
         />
 
-        {/* Products Grid */}
         <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-6">
             {selectedCategory === "all"
