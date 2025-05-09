@@ -4,9 +4,6 @@ import { Input } from "@/components/ui/input";
 import { categories } from "@/lib/categories";
 import CategoryTabs from "./category-tabs";
 import ProductCard from "./product-card";
-// import ProductCard from "@/components/product-card"
-// import CategoryTabs from "@/components/category-tabs"
-// import { products, categories } from "@/lib/data"
 
 export interface Product {
   id: number;

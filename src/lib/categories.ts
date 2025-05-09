@@ -15,7 +15,7 @@ export const categories = [
     icon: "🧒",
   },
   {
-    id: "home-kitchen",
+    id: "home",
     name: "Home",
     icon: "🏠",
   },
@@ -30,12 +30,12 @@ export const categories = [
     icon: "💄",
   },
   {
-    id: "jewellery-accessories",
+    id: "jewellery-and-accessories",
     name: "Jewellery and accessories",
     icon: "💍",
   },
   {
-    id: "bags-footwear",
+    id: "bags-and-foot-wear",
     name: "Bags and foot wear",
     icon: "👜",
   },
@@ -46,7 +46,7 @@ export const categories = [
   },
   {
     id: "decoration",
-    name: "Decor",
+    name: "decoration",
     icon: "🪴",
   },
   {
