@@ -16,7 +16,7 @@ export const categories = [
   },
   {
     id: "home-kitchen",
-    name: "Home and kitchen",
+    name: "Home",
     icon: "🏠",
   },
   {
