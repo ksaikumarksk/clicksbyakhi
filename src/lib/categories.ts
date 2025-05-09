@@ -45,6 +45,11 @@ export const categories = [
     icon: "📱",
   },
   {
+    id: "decoration",
+    name: "Decor",
+    icon: "🪴",
+  },
+  {
     id: "new-born-baby-needs",
     name: "New born Baby needs",
     icon: "🍼",

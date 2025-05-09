@@ -23,11 +23,11 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
         className="flex overflow-x-auto space-x-4 px-10 scrollbar-hide scrollbar-thumb-gray-200 scrollbar-track-gray-100"
       >
         <Button
-        // variant={selectedCategory === "all" ? "default" : "outline"}
+        
         onClick={() => onSelectCategory("all")}
         className={`${
             selectedCategory === "all"
-              ? "bg-green-500 text-black hover:bg-green-600"
+              ? "bg-green-300 text-black hover:bg-green-400"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`}
       > 
@@ -41,7 +41,7 @@ export default function CategoryTabs({ categories, selectedCategory, onSelectCat
           onClick={() => onSelectCategory(category.id)}
           className={`${
             selectedCategory === category.id ?
-              "bg-green-500 text-black hover:bg-green-600"
+              "bg-green-300 text-black hover:bg-green-400"
               : "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50"
           }`} 
         >
