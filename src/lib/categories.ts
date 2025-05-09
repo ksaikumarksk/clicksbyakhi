@@ -20,6 +20,11 @@ export const categories = [
     icon: "🏠",
   },
   {
+    id: "kitchen",
+    name: "Kitchen",
+    icon: "🍳",
+  },
+  {
     id: "beauty",
     name: "Beauty",
     icon: "💄",
