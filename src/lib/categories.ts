@@ -15,9 +15,14 @@ export const categories = [
     icon: "🧒",
   },
   {
-    id: "home",
-    name: "Home",
+    id: "home-need",
+    name: "Home Need",
     icon: "🏠",
+  },
+  {
+    id: "home-decor",
+    name: "Home decor",
+    icon: "🪴",
   },
   {
     id: "kitchen",
@@ -30,9 +35,14 @@ export const categories = [
     icon: "💄",
   },
   {
-    id: "jewellery-and-accessories",
-    name: "Jewellery and accessories",
+    id: "jewellery",
+    name: "Jewellery",
     icon: "💍",
+  },
+  {
+    id: "accessories",
+    name: "Accessories",
+    icon: "🕶️", 
   },
   {
     id: "bags-and-foot-wear",
@@ -43,11 +53,6 @@ export const categories = [
     id: "electronics",
     name: "Electronics",
     icon: "📱",
-  },
-  {
-    id: "decoration",
-    name: "decoration",
-    icon: "🪴",
   },
   {
     id: "new-born-baby-needs",
